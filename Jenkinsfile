@@ -28,7 +28,7 @@ pipeline {
                 sh 'docker container stop nhatanh-nodejs || echo "this container does not exist" '
                 sh 'docker network create dev || echo "this network exists"'
                 sh 'echo y | docker container prune '
-                sh 'docker container run -d --name nhatanh-nodejs -p 3000:3000 --network dev --restart always donhatanh2000/nodejs'
+                sh 'docker container run -d --name nhatanh-nodejs -p 3000:3000 --network dev --restart always donhatanh2000/nodejs:${TAG}'
             }
         }
         
