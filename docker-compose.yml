@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  nginx:
+    image: nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - "80:80" 
+      - "443:443"
+    depends_on:
+      - nodejs
+
+  nodejs:
+    build: .
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_USER: root
+      DB_PASSWORD: 123456a@
+    restart: always
+    ports:
+      - "3000:3000"
+  db:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456a@
+      MYSQL_DATABASE: nodejsmysql
+      MYSQL_USER: nodejs@'&'
+      MYSQL_PASSWORD: 123456a@
+      MYSQL_ROOT_HOST: '192.168.110.128'
+    ports:
+      - "3306:3306"
