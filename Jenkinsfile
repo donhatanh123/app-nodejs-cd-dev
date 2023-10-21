@@ -4,6 +4,7 @@ pipeline {
 
     environment {
         MYSQL_ROOT_LOGIN = credentials('my-sql-account')
+        TAG = "21.10.2023-v5"
     }
     stages {
         stage('Deploy MySQL to DEV') {
@@ -23,7 +24,7 @@ pipeline {
         stage('Deploy nodejs to DEV') {
             steps {
                 echo 'Deploying and cleaning'
-                sh 'docker image pull donhatanh2000/nodejs'
+                sh 'docker image pull donhatanh2000/nodejs:${TAG}'
                 sh 'docker container stop nhatanh-nodejs || echo "this container does not exist" '
                 sh 'docker network create dev || echo "this network exists"'
                 sh 'echo y | docker container prune '
