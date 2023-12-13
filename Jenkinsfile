@@ -4,7 +4,7 @@ pipeline {
 
     environment {
         MYSQL_ROOT_LOGIN = credentials('my-sql-account')
-        TAG = "13.12.2023-v13"
+        TAG = "13.12.2023-v14"
     }
     stages {
         stage('Deploy MySQL to DEV') {
